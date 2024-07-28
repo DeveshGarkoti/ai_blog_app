@@ -56,43 +56,6 @@ def yt_title(link):
 
     return title, views , publish_date
 
-# def download_audio(link):
-#     yt = YouTube(link)
-#     video = yt.streams.filter(only_audio=True)
-#     out_file = video.download(output_path=settings.MEDIA)
-#     base, ext = os.path.splitext(out_file)
-#     new_file = base + '.mp3'
-#     os.rename(out_file, new_file)
-#     return new_file
-
-# def get_transcription(link):
-#     audio_file = download_audio(link)
-#     aai.settings.api_key = "your-assemblyai-api-key"
-
-#     transcriber = aai.Transcriber()
-#     transcript = transcriber.transcribe(audio_file)
-
-#     return transcript.text
-
-# def generate_blog_from_title(title):
-#     openai.api_key = "sk-proj-yV1DCpSvXmh2oqOCPxWxT3BlbkFJWf7ZoWk0yJ2oCNv0Jxzj"
-
-#     prompt = f"Based on the following title from a YouTube video, write a comprehensive blog article, write it based on the transcript, but dont make it look like a youtube video, make it look like a proper blog article: \n\n{title}\n\n Article:"
-
-  
-#     response = openai.Completion.create(
-#         model="GPT-3.5 Turbo",
-#         messages=[
-#                 {"role": "system", "content": "You are a helpful assistant."},
-#                 {"role": "user", "content": prompt}
-#             ],
-#         max_tokens=1000
-#     )
-
-#     generated_content = response.choices[0].text.strip()
-
-#     return generated_content
-
 def blog_list(request):
     blog_articles = BlogPost.objects.filter(user = request.user)
     return render(request, 'all-blogs.html', {'blog_articles':blog_articles})
